@@ -1,0 +1,13 @@
+.information {
+	font-size: 40px;
+	color: white;
+	margin-bottom: 50px;
+}
+
+.isX {
+	color: #cc4435;
+}
+
+.isO {
+	color: #4caf50;
+}
