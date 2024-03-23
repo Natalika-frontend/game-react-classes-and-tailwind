@@ -1,12 +1,6 @@
-import { FieldLayout } from './FieldLayout';
-import PropTypes from 'prop-types';
+import { FieldLayout } from './FieldLayout/FieldLayout';
 
-export const Field = ({ field, handleCellClick }) => {
+export const Field = () => {
 
-	return <FieldLayout field={field} handleCellClick={handleCellClick} />;
+	return <FieldLayout />;
 }
-
-Field.propTypes = {
-	find: PropTypes.array,
-	handleCellClicksDraw: PropTypes.func
-};

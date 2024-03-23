@@ -2,11 +2,17 @@ import styles from './Game.module.css';
 import { Field } from '../Field/Field';
 import { Information } from '../Information/Information';
 import PropTypes from 'prop-types';
+import { store } from '../../store/store';
+import { resetGame } from '../../store/actions';
 
-export const GameLayout = ({ field, handleCellClick, currentPlayer, isGameEnded, isDraw, handleClick }) => {
+export const GameLayout = () => {
+	const handleClick = () => {
+		store.dispatch(resetGame());
+	};
+
 	return <div className={styles.container}>
-		<Information currentPlayer={currentPlayer} isGameEnded={isGameEnded} isDraw={isDraw} />
-		<Field field={field} handleCellClick={handleCellClick} currentPlayer={currentPlayer} />
+		<Information />
+		<Field />
 		<button className={styles.btn} onClick={handleClick}>Начать заново</button>
 	</div>;
 };
