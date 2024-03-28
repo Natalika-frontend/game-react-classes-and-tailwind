@@ -2,14 +2,8 @@ import styles from './Game.module.css';
 import { Field } from '../Field/Field';
 import { Information } from '../Information/Information';
 import PropTypes from 'prop-types';
-import { store } from '../../store/store';
-import { resetGame } from '../../store/actions';
 
-export const GameLayout = () => {
-	const handleClick = () => {
-		store.dispatch(resetGame());
-	};
-
+export const GameLayout = ({handleClick}) => {
 	return <div className={styles.container}>
 		<Information />
 		<Field />
