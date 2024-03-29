@@ -1,9 +1,7 @@
 import { WIN_PATTERNS } from '../constants/constants';
 import { endGame, setDraw } from '../store/actions';
-import { useDispatch } from 'react-redux';
 
-export const useCheckWin = (currentField) => {
-	const dispatch = useDispatch();
+export const checkWin = (currentField, dispatch) => {
 	for (const pattern of WIN_PATTERNS) {
 		const [a, b, c] = pattern;
 		if (currentField[a] && currentField[a] === currentField[b] && currentField[a] === currentField[c]) {

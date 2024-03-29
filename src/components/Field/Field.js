@@ -1,9 +1,9 @@
 import { FieldLayout } from './FieldLayout/FieldLayout';
-import { useEffect } from 'react';
-import { useCheckWin } from '../../utils/check-win';
+import { checkWin } from '../../utils/check-win';
 import { endGame, setCell } from '../../store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentPlayer, selectField, selectIsGameEnded } from '../../selectors';
+import { useEffect } from 'react';
 
 export const Field = () => {
 	const field = useSelector(selectField);
@@ -17,21 +17,19 @@ export const Field = () => {
 		return isDraw;
 	};
 
-	const isWin = useCheckWin(field);
-
-	useEffect(() => {
-		const isDraw = checkDraw(field);
-
-		if (isDraw && !isWin) {
-			dispatch(endGame());
-		}
-	}, [dispatch, field, isWin]);
-
 	const handleCellClick = (index) => {
 		if (!field[index] && !isGameEnded) {
 			dispatch(setCell(index, currentPlayer));
 		}
 	};
+
+	useEffect(() => {
+		const isDraw = checkDraw(field);
+		const isWin = checkWin(field, dispatch);
+		if (isDraw && !isWin) {
+			dispatch(endGame());
+		}
+	}, [dispatch, field]);
 
 	return <FieldLayout field={field} handleCellClick={handleCellClick} />;
 }
