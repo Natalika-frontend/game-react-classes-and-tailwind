@@ -1,4 +1,3 @@
-import { StrictMode } from 'react';
 import { GameLayout } from './components/GameLayout/GameLayout.js';
 import { resetGame } from './store/actions';
 import { useDispatch } from 'react-redux';
@@ -10,9 +9,6 @@ export const App = () => {
 	};
 
 	return (
-		<StrictMode>
 			<GameLayout	handleClick={handleClick} />
-		</StrictMode>
-
 	);
 };
