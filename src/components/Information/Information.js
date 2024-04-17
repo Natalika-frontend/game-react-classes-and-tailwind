@@ -1,5 +1,4 @@
 import { InformationLayout} from './InformationLayout/InformationLayout.js';
-import styles from './InformationLayout/information.module.css';
 import { connect } from 'react-redux';
 import { selectCurrentPlayer, selectIsDraw, selectIsGameEnded } from '../../selectors';
 import { Component } from 'react';
@@ -8,7 +7,7 @@ class Information extends Component {
 	render() {
 		const { isDraw, isGameEnded, currentPlayer } = this.props;
 
-		let playerClass = isDraw ? '' : (currentPlayer === 'x' ? (isGameEnded ? styles.isO : styles.isX) : (isGameEnded ? styles.isX : styles.isO));
+		let playerClass = isDraw ? '' : (currentPlayer === 'x' ? (isGameEnded ? "isO" : "isX") : (isGameEnded ? "isX" : "isO"));
 
 		return (
 			<InformationLayout playerClass={playerClass} isDraw={isDraw} isGameEnded={isGameEnded} currentPlayer={currentPlayer} />

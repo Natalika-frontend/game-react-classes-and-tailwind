@@ -1,4 +1,3 @@
-import styles from './information.module.css';
 import PropTypes from 'prop-types';
 import { Component } from 'react';
 
@@ -7,7 +6,7 @@ export class InformationLayout extends Component {
 		const { playerClass, isDraw, isGameEnded, currentPlayer } = this.props;
 
 		return (
-			<div className={`${styles.information} ${playerClass}`}>
+			<div className={`information ${playerClass}`}>
 				{!isDraw && !isGameEnded && `Ходит: ${currentPlayer}`}
 				{isDraw && 'Ничья'}
 				{!isDraw && isGameEnded && `Победа: ${currentPlayer === 'x' ? 'o' : 'x'}`}

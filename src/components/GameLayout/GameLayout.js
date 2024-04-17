@@ -1,4 +1,3 @@
-import styles from './Game.module.css';
 import Field from '../Field/Field';
 import Information from '../Information/Information';
 import PropTypes from 'prop-types';
@@ -8,12 +7,12 @@ export class GameLayout extends Component {
 	render() {
 		const { handleClick } = this.props;
 		return (
-			<div className={styles.container}>
+			<div className="container">
 				<Information />
 				<Field />
-				<button className={styles.btn} onClick={handleClick}>Начать заново</button>
+				<button className="btn" onClick={handleClick}>Начать заново</button>
 			</div>
-	)
+		);
 	}
 };
 

@@ -1,4 +1,3 @@
-import styles from './Field.module.css';
 import PropTypes from 'prop-types';
 
 import { Component } from 'react';
@@ -24,10 +23,10 @@ export class FieldLayout extends Component {
 
 	render() {
 		const { field } = this.state;
-		return <div className={styles.field}>
+		return <div className="field">
 			{field.map((value, index) => (
 				<button key={index}
-						className={`${styles.cell} ${value === 'x' ? styles.isX : value === 'o' ? styles.isO : ''}`}
+						className={`cell ${value === 'x' ? "isX" : value === 'o' ? "isO" : ''}`}
 						onClick={() => this.handleCellClick(index)}>{value}</button>
 			))}
 		</div>;
