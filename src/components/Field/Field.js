@@ -1,35 +1,43 @@
 import { FieldLayout } from './FieldLayout/FieldLayout';
 import { checkWin } from '../../utils/check-win';
 import { endGame, setCell } from '../../store/actions';
-import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentPlayer, selectField, selectIsGameEnded } from '../../selectors';
-import { useEffect } from 'react';
+import { Component } from 'react';
+import { connect } from 'react-redux';
 
-export const Field = () => {
-	const field = useSelector(selectField);
-	const isGameEnded = useSelector(selectIsGameEnded);
-	const currentPlayer = useSelector(selectCurrentPlayer);
-	const dispatch = useDispatch();
+class Field extends Component {
+	constructor(props) {
+		super(props);
+		this.handleCellClick = this.handleCellClick.bind(this);
+	}
 
-
-	const checkDraw = (currentField) => {
-		const isDraw = currentField.every(cell => cell !== '');
-		return isDraw;
-	};
-
-	const handleCellClick = (index) => {
+	handleCellClick(index) {
+		const { field, isGameEnded, currentPlayer, dispatch } = this.props;
 		if (!field[index] && !isGameEnded) {
 			dispatch(setCell(index, currentPlayer));
 		}
-	};
+	}
 
-	useEffect(() => {
-		const isDraw = checkDraw(field);
+	componentDidUpdate(prevProps) {
+		const { field, dispatch } = this.props;
+		const { field: prevField } = prevProps;
+		const isDraw = field.every(cell => cell !== '');
 		const isWin = checkWin(field, dispatch);
-		if (isDraw && !isWin) {
+		if (isDraw && !isWin && field !== prevField) {
 			dispatch(endGame());
 		}
-	}, [dispatch, field]);
+	}
 
-	return <FieldLayout field={field} handleCellClick={handleCellClick} />;
+	render() {
+		const { field } = this.props;
+		return <FieldLayout field={field} handleCellClick={this.handleCellClick} />
+	}
 }
+
+const mapStateToProps = state => ({
+	field: selectField(state),
+	isGameEnded: selectIsGameEnded(state),
+	currentPlayer: selectCurrentPlayer(state),
+});
+
+export default connect(mapStateToProps)(Field);

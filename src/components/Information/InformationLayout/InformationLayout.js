@@ -1,14 +1,20 @@
 import styles from './information.module.css';
 import PropTypes from 'prop-types';
+import { Component } from 'react';
 
-export const InformationLayout = ({playerClass, isDraw, isGameEnded, currentPlayer }) => {
+export class InformationLayout extends Component {
+	render() {
+		const { playerClass, isDraw, isGameEnded, currentPlayer } = this.props;
 
-	return <div className={`${styles.information} ${playerClass}`}>
-		{!isDraw && !isGameEnded && `Ходит: ${currentPlayer}`}
-		{isDraw && 'Ничья'}
-		{!isDraw && isGameEnded && `Победа: ${currentPlayer === 'x' ? 'o' : 'x'}`}
-	</div>;
-};
+		return (
+			<div className={`${styles.information} ${playerClass}`}>
+				{!isDraw && !isGameEnded && `Ходит: ${currentPlayer}`}
+				{isDraw && 'Ничья'}
+				{!isDraw && isGameEnded && `Победа: ${currentPlayer === 'x' ? 'o' : 'x'}`}
+			</div>
+		);
+	}
+}
 
 InformationLayout.propTypes = {
 	currentPlayer: PropTypes.string,
